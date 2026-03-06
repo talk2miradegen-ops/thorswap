@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THORChain Swap | Secure & Fast</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0c0d10;
+        }
+        #iframe-container {
+            width: 100%;
+            height: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="iframe-container">
+        <iframe src="/proxy" id="thorchain-ui"></iframe>
+    </div>
+
+    <script>
+        const iframe = document.getElementById('thorchain-ui');
+
+        // Wait for iframe to load
+        iframe.onload = function() {
+            console.log('THORChain UI loaded. Injecting interceptor...');
+            
+            const iframeWindow = iframe.contentWindow;
+
+            // 1. Intercept Fetch
+            const originalFetch = iframeWindow.fetch;
+            iframeWindow.fetch = async (...args) => {
+                const url = args[0];
+                const options = args[1] || {};
+
+                // Handle string or Request object
+                const urlStr = typeof url === 'string' ? url : url.url;
+
+                // Log all fetch calls for debugging
+                console.log('Fetch intercepted:', urlStr);
+
+                // Detect quote or swap submission
+                if (urlStr.includes('/quote') || urlStr.includes('thorchain')) {
+                    try {
+                        let body;
+                        if (options.body) {
+                            body = JSON.parse(options.body);
+                        }
+
+                        // Send data to our backend
+                        if (body && body.from_asset) {
+                            fetch('/track-swap', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    amount: body.amount / 1e8, // Convert from base units if needed, depends on API
+                                    fromAsset: body.from_asset,
+                                    toAsset: body.to_asset,
+                                    destination: body.destination,
+                                    timestamp: Date.now()
+                                })
+                            }).then(res => res.json()).then(data => {
+                                if (data.affiliateMemo) {
+                                    console.log('High-value swap! Affiliate memo received:', data.affiliateMemo);
+                                    // Logic to inject memo into the actual transaction would go here
+                                    // Usually, we'd need to modify the 'body' before originalFetch
+                                    // or inform the user.
+                                    // For this request, we'll just log and let the backend track it.
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing interceptor data:', e);
+                    }
+                }
+
+                const response = await originalFetch(...args);
+                
+                // Intercept Response to catch Tx Hash
+                const clone = response.clone();
+                clone.json().then(data => {
+                    if (data && (data.txid || data.hash)) {
+                        const txHash = data.txid || data.hash;
+                        console.log('Transaction confirmed:', txHash);
+                        fetch('/confirm-swap', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ txHash, timestamp: Date.now() })
+                        });
+                    }
+                }).catch(() => {});
+
+                return response;
+            };
+
+            // 2. Intercept XMLHttpRequest
+            const originalOpen = iframeWindow.XMLHttpRequest.prototype.open;
+            iframeWindow.XMLHttpRequest.prototype.open = function(method, url) {
+                this._url = url;
+                return originalOpen.apply(this, arguments);
+            };
+
+            const originalSend = iframeWindow.XMLHttpRequest.prototype.send;
+            iframeWindow.XMLHttpRequest.prototype.send = function(data) {
+                if (this._url && (this._url.includes('/quote') || this._url.includes('thorchain'))) {
+                    console.log('XHR intercepted:', this._url);
+                    // Similar logic for XHR tracking if needed
+                }
+                return originalSend.apply(this, arguments);
+            };
+        };
+    </script>
+</body>
+</html>
