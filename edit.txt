@@ -1,0 +1,61 @@
+🟠 Bitcoin Network
+
+BTC
+
+🟣 Ethereum Network
+
+ETH
+
+USDT (ERC-20)
+
+USDC (ERC-20)
+
+DAI
+
+LINK
+
+AAVE
+
+WBTC
+
+🟡 BNB Chain
+
+BNB
+
+🔵 Avalanche
+
+AVAX
+
+USDC (AVAX)
+
+USDT (AVAX)
+
+⚛️ Cosmos Hub
+
+ATOM
+
+🟢 THORChain
+
+RUNE
+
+🐶 Dogecoin
+
+DOGE
+
+🟤 Litecoin
+
+LTC
+
+🟩 Bitcoin Cash
+
+BCH
+
+🔴 TRON Network
+
+TRX
+
+USDT (TRC-20)
+
+🔷 XRP Ledger
+
+XRP

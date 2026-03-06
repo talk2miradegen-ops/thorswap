@@ -1,0 +1,28 @@
+{
+  "inbound_address": "bc1q9utqqlrdy78ypy4ph8ekejh9jscqyp5e0y5hgx",
+  "inbound_confirmation_blocks": 1,
+  "inbound_confirmation_seconds": 600,
+  "outbound_delay_blocks": 162,
+  "outbound_delay_seconds": 972,
+  "fees": {
+    "asset": "ETH.ETH",
+    "affiliate": "0",
+    "outbound": "12445",
+    "liquidity": "62547131",
+    "total": "62559576",
+    "slippage_bps": 184,
+    "total_bps": 184
+  },
+  "expiry": 1772597952,
+  "warning": "Do not cache this response. Do not send funds after the expiry.",
+  "notes": "First output should be to inbound_address, second output should be change back to self, third output should be OP_RETURN, limited to 80 bytes. Do not send below the dust threshold. Do not use exotic spend scripts, locks or address formats.",
+  "dust_threshold": "1000",
+  "recommended_min_amount_in": "9813",
+  "recommended_gas_rate": "6",
+  "gas_rate_units": "satsperbyte",
+  "memo": "=:e:0x1234567890123456789012345678901234567890",
+  "expected_amount_out": "3333764281",
+  "max_streaming_quantity": 0,
+  "streaming_swap_blocks": 0,
+  "total_swap_seconds": 1572
+}
