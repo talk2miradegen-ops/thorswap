@@ -1,0 +1,80 @@
+.integration-card.svelte-1rf9pgi {
+    background: linear-gradient(145deg,rgba(255,255,255,.03) 0%,rgba(255,255,255,.01) 100%);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.1);
+    position: relative
+}
+
+.integration-card.svelte-1rf9pgi:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,rgba(3,207,250,.1) 0%,rgba(49,253,157,.1) 25%,rgba(3,207,250,.1) 50%,rgba(49,253,157,.1) 75%,rgba(3,207,250,.1) 100%);
+    background-size: 400% 400%;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    -webkit-animation: svelte-1rf9pgi-gradientShift 8s ease infinite;
+    animation: svelte-1rf9pgi-gradientShift 8s ease infinite;
+    border-radius: inherit;
+    z-index: 1
+}
+
+.integration-card.svelte-1rf9pgi:hover:before {
+    opacity: 1
+}
+
+.integration-card.svelte-1rf9pgi:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,transparent 0%,rgba(255,255,255,.03) 50%,transparent 100%);
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: inherit;
+    z-index: 2
+}
+
+.integration-card.svelte-1rf9pgi:hover:after {
+    opacity: 1
+}
+
+@-webkit-keyframes svelte-1rf9pgi-gradientShift {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    to {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes svelte-1rf9pgi-gradientShift {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    to {
+        background-position: 0% 50%
+    }
+}
+
+.integration-card.svelte-1rf9pgi {
+    transform-origin: center;
+    will-change: transform,opacity;
+    min-height: 80px
+}

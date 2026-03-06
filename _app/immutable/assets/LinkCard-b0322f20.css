@@ -1,0 +1,114 @@
+.card-container.svelte-jvn1h9.svelte-jvn1h9 {
+    position: relative;
+    border-radius: .5rem;
+    height: 100%
+}
+
+.card-hover-effect.svelte-jvn1h9.svelte-jvn1h9 {
+    position: relative;
+    height: 100%;
+    transition: transform .3s ease-in-out
+}
+
+.card-hover-effect.svelte-jvn1h9.svelte-jvn1h9:before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg,#00CCBB,#3399FF,#00CCBB,#3399FF);
+    background-size: 400% 400%;
+    border-radius: .5rem;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    -webkit-animation: svelte-jvn1h9-gradientBorder 3s ease infinite;
+    animation: svelte-jvn1h9-gradientBorder 3s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 2px
+}
+
+.card-hover-effect.svelte-jvn1h9.svelte-jvn1h9:hover:before {
+    opacity: 1
+}
+
+@-webkit-keyframes svelte-jvn1h9-gradientBorder {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    to {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes svelte-jvn1h9-gradientBorder {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    to {
+        background-position: 0% 50%
+    }
+}
+
+.card-content.svelte-jvn1h9.svelte-jvn1h9 {
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.title-logo-container.svelte-jvn1h9.svelte-jvn1h9 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem
+}
+
+.logo-column.svelte-jvn1h9.svelte-jvn1h9 {
+    flex: 0 0 auto;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.logo-column.small.svelte-jvn1h9 .card-logo.svelte-jvn1h9 {
+    max-width: 40px;
+    max-height: 40px
+}
+
+.logo-column.medium.svelte-jvn1h9 .card-logo.svelte-jvn1h9 {
+    max-width: 60px;
+    max-height: 60px
+}
+
+.logo-column.large.svelte-jvn1h9 .card-logo.svelte-jvn1h9 {
+    max-width: 80px;
+    max-height: 80px
+}
+
+.card-logo.svelte-jvn1h9.svelte-jvn1h9 {
+    transition: transform .3s ease;
+    width: 100%;
+    height: auto;
+    -o-object-fit: contain;
+    object-fit: contain
+}
+
+.title-column.svelte-jvn1h9.svelte-jvn1h9 {
+    flex: 1;
+    display: flex;
+    align-items: center
+}
+
+.button-container.svelte-jvn1h9.svelte-jvn1h9 {
+    margin-top: auto
+}
